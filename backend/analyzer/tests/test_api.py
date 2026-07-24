@@ -48,3 +48,17 @@ class AnalyzeAPITests(APITestCase):
         )
 
         self.assertIn("title", response.data)
+
+    def test_raw_string_body(self):
+        response = self.client.post(
+            "/api/analyze/",
+            data=b"https://example.com",
+            content_type="application/json"
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+
+        self.assertIn("title", response.data)

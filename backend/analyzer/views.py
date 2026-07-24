@@ -1,5 +1,8 @@
+import json
+
 from requests.exceptions import RequestException
 from rest_framework import status
+from rest_framework.parsers import BaseParser, FormParser, JSONParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -8,7 +11,33 @@ from .services.parser import analyze_page
 from .services.validator import validate_url
 
 
+class RawBodyParser(BaseParser):
+    media_type = "*/*"
+    renderer_class = None
+
+    def parse(self, stream, media_type=None, parser_context=None):
+        raw_body = stream.read().decode("utf-8").strip()
+
+        if not raw_body:
+            return {}
+
+        try:
+            parsed_body = json.loads(raw_body)
+        except json.JSONDecodeError:
+            return {"url": raw_body}
+
+        if isinstance(parsed_body, dict):
+            return parsed_body
+
+        if isinstance(parsed_body, str):
+            return {"url": parsed_body}
+
+        return {"url": str(parsed_body)}
+
+
 class AnalyzeURLView(APIView):
+    parser_classes = [RawBodyParser, JSONParser, FormParser, MultiPartParser]
+
     def post(self, request):
         serializer = URLSerializer(data=request.data)
 
