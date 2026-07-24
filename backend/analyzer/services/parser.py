@@ -51,6 +51,29 @@ def analyze_page(url: str):
 
     response_time = round((time.time() - start_time) * 1000)
 
+    canonical = soup.find("link", rel="canonical")
+
+    og_title = soup.find("meta", property="og:title")
+
+    internal_links = 0
+    external_links = 0
+
+    from urllib.parse import urlparse
+
+    base_domain = urlparse(url).netloc
+
+    for link in soup.find_all("a", href=True):
+        href = link["href"]
+
+        if href.startswith("/"):
+            internal_links += 1
+
+        elif href.startswith("http"):
+            if urlparse(href).netloc == base_domain:
+                internal_links += 1
+            else:
+                external_links += 1
+
     return {
         "status": response.status_code,
         "response_time": response_time,
@@ -59,4 +82,8 @@ def analyze_page(url: str):
         "h1_count": h1_count,
         "missing_alt_images": missing_alt,
         "word_count": len(words),
+        "canonical": "Present" if canonical else "Missing",
+        "open_graph_title": "Present" if og_title else "Missing",
+        "internal_links": internal_links,
+        "external_links": external_links,
     }
