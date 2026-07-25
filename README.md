@@ -1,63 +1,191 @@
 # 🚀 Page Pulse
 
-Page Pulse is a web-based SEO and webpage auditing tool built for the Digital Heroes Software Development Internship Assignment.
+> A modern web application that analyzes any webpage and generates a quick SEO overview by extracting key metadata, accessibility indicators, and page statistics.
 
-Users can enter any webpage URL and receive an analysis report containing key technical and SEO metrics.
+![Home](./screenshots/home.png)
 
 ---
 
-## ✨ Features
+## 🌐 Live Demo
 
-- HTTP Status Code
+**Frontend:** https://page-pulse-sooty.vercel.app/
+
+**Backend API:** https://page-pulse-backend-g2ob.onrender.com
+
+**GitHub Repository:** https://github.com/sumanyunayak/Page-Pulse
+
+---
+
+# 📖 Overview
+
+Page Pulse is a full-stack web application built as part of the **Digital Heroes Software Development Internship Assignment**.
+
+The application allows users to enter any valid webpage URL and instantly receive an SEO audit containing important metrics such as:
+
+- HTTP Status
 - Response Time
 - Page Title
 - Meta Description
-- H1 Count
-- Missing Alt Images
-- Approximate Word Count
-- Canonical Tag Detection
-- Open Graph Title Detection
-- Internal Link Count
-- External Link Count
-- Robust Error Handling
-- Responsive React Frontend
-- REST API powered by Django
+- Heading Analysis
+- Image Accessibility
+- Canonical Tag
+- Open Graph Title
+- Internal Links
+- External Links
+- Word Count
+
+The goal was to build a clean, responsive, production-ready application while emphasizing backend correctness, clean architecture, API design, and user experience.
 
 ---
 
-## 🛠 Tech Stack
+# ✨ Features
 
-### Frontend
+- 🔍 Website SEO Analysis
+- ⚡ Fast API Response
+- 📄 Page Title Extraction
+- 📝 Meta Description Detection
+- 📑 H1 Tag Count
+- 🖼 Missing Image Alt Detection
+- 📊 Word Count
+- 🔗 Internal & External Link Count
+- 📌 Canonical Tag Detection
+- 🌐 Open Graph Title Detection
+- 🚫 Error Handling for Invalid URLs
+- 📱 Fully Responsive Design
+- 🎨 Modern Bento Grid Interface
+- ✨ Smooth Loading Animations
+- 🌌 Animated Background
+
+---
+
+# 📸 Screenshots
+
+## Home
+
+![Home](./screenshots/homepage.png)
+
+---
+
+## Loading
+
+![Loading](./screenshots/loading.png)
+
+---
+
+## Results
+
+![Results](./screenshots/results1.png)
+![Results](./screenshots/results2.png)
+
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
 
 - React
 - Vite
 - Axios
+- CSS
+- Magic UI
+- UIVerse
+- Lucide React
 
-### Backend
+## Backend
 
 - Django
 - Django REST Framework
 - BeautifulSoup4
 - Requests
 
----
+## Deployment
 
-## 📂 Project Structure
-
-page-pulse/
-
-backend/
-
-frontend/
+- Vercel (Frontend)
+- Render (Backend)
 
 ---
 
-## 🚀 Running Locally
+# 🏗 Project Structure
 
-### Backend
+```
+Page-Pulse
+│
+├── backend
+│   ├── analyzer
+│   ├── config
+│   ├── requirements.txt
+│   └── manage.py
+│
+├── frontend
+│   ├── src
+│   │   ├── components
+│   │   ├── services
+│   │   ├── assets
+│   │   └── App.jsx
+│   └── package.json
+│
+├── screenshots
+│
+└── README.md
+```
+
+---
+
+# ⚙ API Endpoint
+
+### POST
+
+```
+POST /api/analyze/
+```
+
+### Request
+
+```json
+{
+  "url": "https://google.com"
+}
+```
+
+### Sample Response
+
+```json
+{
+  "status": 200,
+  "response_time": 598,
+  "title": "Google",
+  "meta_description": "No Meta Description",
+  "h1_count": 0,
+  "missing_alt_images": 6,
+  "word_count": 73,
+  "canonical": "Missing",
+  "open_graph_title": "Missing",
+  "internal_links": 4,
+  "external_links": 14
+}
+```
+
+---
+
+# 🚀 Running Locally
+
+## Clone Repository
+
+```bash
+git clone https://github.com/sumanyunayak/Page-Pulse.git
+```
+
+---
+
+## Backend
 
 ```bash
 cd backend
+
+python -m venv venv
+
+venv\Scripts\activate
 
 pip install -r requirements.txt
 
@@ -66,7 +194,15 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-### Frontend
+Backend runs on
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## Frontend
 
 ```bash
 cd frontend
@@ -76,87 +212,84 @@ npm install
 npm run dev
 ```
 
----
-
-## API
-
-### POST
+Frontend runs on
 
 ```
-/api/analyze/
-```
-
-Request
-
-```json
-{
-  "url": "https://example.com"
-}
-```
-
-Response
-
-```json
-{
-  "status": 200,
-  "response_time": 180,
-  "title": "...",
-  "meta_description": "...",
-  "h1_count": 1,
-  "missing_alt_images": 0,
-  "word_count": 235,
-  "canonical": "Present",
-  "open_graph_title": "Present",
-  "internal_links": 25,
-  "external_links": 8
-}
+http://localhost:5173
 ```
 
 ---
 
-## Design Decisions
+# 🧪 Testing
 
-### 1. Service Layer
-
-The parsing and URL validation logic are separated into dedicated service modules, keeping the API view focused on request handling and improving maintainability.
-
-### 2. Django REST Framework
-
-DRF serializers validate incoming requests and provide consistent API responses.
-
-### 3. Component-Based Frontend
-
-The React application is organized into reusable components with API communication isolated in a service layer.
-
----
-
-## Testing
-
-The backend includes unit tests covering:
+The backend includes automated tests for:
 
 - URL validation
-- API success cases
-- Invalid input
+- API endpoint
+- Invalid URL handling
+- HTML parsing
 - Error handling
 
+Run tests using:
+
+```bash
+python manage.py test
+```
+
 ---
 
-## AI Usage
+# 💡 Design Decisions
 
-I used AI tools as a development assistant to help with project planning, reviewing implementation approaches, generating initial frontend boilerplate, and refining documentation. I independently implemented the backend logic, integrated the frontend with the API, tested the application, and modified the generated code based on my own design decisions.
+### Why React?
+
+React provides a fast, component-based architecture that makes the frontend modular, reusable, and easy to maintain.
+
+### Why Django REST Framework?
+
+DRF simplifies REST API development, serialization, validation, and error handling while keeping the backend organized.
+
+### Why BeautifulSoup?
+
+BeautifulSoup offers a lightweight and reliable way to parse HTML and extract metadata, headings, links, and other SEO-related information.
+
+### Why Render & Vercel?
+
+Render provides a straightforward deployment experience for Django applications, while Vercel offers excellent performance and seamless deployment for React applications.
 
 ---
 
-## Future Improvements
+# 🤖 AI Usage
 
-- Lighthouse Performance Scoring
-- Accessibility Audit
+AI tools (ChatGPT and OpenCode) were used during development for brainstorming, debugging, UI refinement, code reviews, and implementation guidance.
+
+All architectural decisions, backend integration, frontend implementation, testing, deployment, and final validation were completed by me. AI was used as a development assistant to improve productivity while maintaining ownership of the final engineering decisions.
+
+---
+
+# 🚧 Future Improvements
+
+- SEO Health Score
+- Google Lighthouse Integration
+- PageSpeed Insights API
 - PDF Report Export
-- Historical Scan Comparison
-- Open Graph Preview
-- Sitemap Analysis
-- robots.txt Validation
+- Historical Analysis
+- Authentication
+- User Dashboard
+- Report History
+- Multi-page Crawling
 
 ---
 
-Built for Digital Heroes Training Task.
+# 👨‍💻 Author
+
+**Sumanyu Nayak**
+
+GitHub
+
+https://github.com/sumanyunayak
+
+---
+
+# 📄 License
+
+This project was developed as part of the **Digital Heroes Software Development Internship Assignment** and is intended for evaluation purposes.
