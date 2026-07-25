@@ -2,7 +2,7 @@
 
 > A modern web application that analyzes any webpage and generates a quick SEO overview by extracting key metadata, accessibility indicators, and page statistics.
 
-![Home](./screenshots/home.png)
+![Home](./screenshots/homepage.png)
 
 ---
 
