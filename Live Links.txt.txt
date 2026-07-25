@@ -1,0 +1,11 @@
+GitHub Repository
+https://github.com/sumanyunayak/Page-Pulse
+
+Live Frontend
+https://page-pulse-sooty.vercel.app/
+
+Backend API
+https://page-pulse-backend-g2ob.onrender.com/
+
+Backend Endpoint
+https://page-pulse-backend-g2ob.onrender.com/api/analyze/
