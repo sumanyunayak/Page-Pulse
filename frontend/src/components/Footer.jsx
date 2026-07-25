@@ -16,7 +16,7 @@ export default function Footer() {
       </p>
       <p className="footer-tech">React &middot; Django REST Framework &middot; Render</p>
       <a
-        href="https://github.com/SumanyuKumar/PagePulse"
+        href="https://github.com/sumanyunayak/Page-Pulse"
         target="_blank"
         rel="noopener noreferrer"
         className="footer-link"

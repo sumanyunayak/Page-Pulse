@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: page-pulse-api
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py migrate && gunicorn config.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: page-pulse-api.onrender.com
